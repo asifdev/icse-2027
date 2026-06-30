@@ -101,5 +101,5 @@ python scripts/run_ci_drift_master.py --config configs/master_lrts_ci_drift.yaml
 
 ## Notes
 
-- Raw LRTS data and generated result tables are not included.
+- Raw LRTS data can be downlaoded from https://drive.google.com/file/d/13vnCA0tY2BMY9irfn0nV01bJnST6z4kx/view.
 - All reported result tables are computed from loaded LRTS data; missing or unreadable raw test archives are logged during loading.
