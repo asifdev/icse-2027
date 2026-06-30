@@ -1,0 +1,2 @@
+from .generic import run_generic_detectors
+from .software_aware import run_software_aware_detectors

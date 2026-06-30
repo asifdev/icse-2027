@@ -1,0 +1,47 @@
+run: {id: master_lrts_run_001, seed: 42, mode: smoke}
+datasets:
+  lrts: {path: 'C:/Users/asikhan/Downloads/long_running_test_suites/long_running_test_suites', enabled: true, auto_discover: true, smoke_project: activemq}
+windowing:
+  date_column_candidates: [build_started_at, build_start_time, start_time, created_at, commit_date, date, timestamp]
+  project_column_candidates: [project, project_name, repository, repo, repo_name]
+  test_column_candidates: [test_name, test, test_case, testcase, test_id]
+  outcome_column_candidates: [verdict, outcome, status, result, failed, is_failed]
+  duration_column_candidates: [duration, duration_sec, elapsed, runtime, execution_time]
+  granularities: [monthly, quarterly]
+  strategies: [chronological, rolling, expanding, prequential]
+  min_builds_per_window: 5
+  min_tests_per_window: 10
+features:
+  include: [failure_rate, recent_failure_rate, last_failure_age, duration_mean, duration_median, duration_shift, test_age, suite_size, test_churn, build_cadence, new_tests, removed_tests]
+baseline_models:
+  tcp: [random_order, duration_ascending, duration_descending, failure_history, recent_failure_history, random_forest, gradient_boosting]
+  smoke_limit_projects: 1
+  smoke_limit_windows: 3
+metrics: [APFD, APFDc, NAPFD, first_failure_rank, time_to_first_failure, time_saved]
+drift_detectors:
+  generic: [ks_test, hellinger, jensen_shannon, cusum, adwin_light]
+  software_aware: [failure_rate_shift, duration_shift, suite_size_shift, test_churn_shift, build_cadence_shift, performance_degradation]
+  thresholds: {p_value: 0.05, distance: 0.15, relative_change: 0.25, performance_drop: 0.05}
+label_budget:
+  budgets_percent: [1, 5, 10, 25, 50, 100]
+  delays: [0, 1, 3, 7, 14]
+audit_policies: [random, failure_risk_based, duration_risk_based, change_aware, prioritization_cutoff]
+cost_model:
+  retraining_cost: 1.0
+  false_alarm_cost: 1.0
+  missed_drift_cost: 5.0
+  delayed_failure_cost: 3.0
+  ci_minute_cost: 0.1
+  sensitivity_multipliers: [0.5, 1.0, 2.0, 5.0]
+retraining_policies: [none, periodic_monthly, periodic_quarterly, rolling_window, drift_triggered, audit_triggered, ensemble_weighting, heuristic_fallback]
+paper_exports:
+  conference_01_ci_driftlab_benchmark: {phases: [1]}
+  conference_02_anatomy_of_cicd_drift: {phases: [1, 2]}
+  conference_03_generic_vs_software_specific_drift_detectors: {phases: [2]}
+  conference_04_label_efficient_drift_monitoring: {phases: [3]}
+  conference_05_retraining_recovery_policy: {phases: [4]}
+  conference_06_cost_of_false_drift_alarms: {phases: [2, 3]}
+  conference_07_taxonomy_of_cicd_testing_drift: {phases: [2]}
+  conference_08_cross_dataset_drift_generalization: {phases: [1, 2]}
+  conference_09_temporal_evaluation_protocols: {phases: [1]}
+  conference_10_human_in_the_loop_micro_audits: {phases: [3]}

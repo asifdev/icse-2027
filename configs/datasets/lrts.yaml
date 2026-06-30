@@ -1,0 +1,4 @@
+name: lrts
+path: 'C:/Users/asikhan/Downloads/long_running_test_suites/long_running_test_suites'
+auto_discover: true
+smoke_project: activemq
