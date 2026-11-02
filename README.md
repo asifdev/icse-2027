@@ -1,4 +1,4 @@
-# ICSE 2026 LRTS Result Reproduction Code
+# LRTS Result Reproduction Code
 
 This archive contains the code needed to regenerate the CI-DriftLab experiment results for the LRTS dataset.
 
